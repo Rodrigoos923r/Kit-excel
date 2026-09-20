@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Kit Excel para Economizar Tempo — 5 recursos práticos para reduzir tarefas manuais no trabalho.">
+  <title>Kit Excel para Economizar Tempo</title>
+
+  <style>
+    :root{
+      --green-950:#052e22;
+      --green-900:#064d39;
+      --green-800:#08734f;
+      --green-700:#0b8a5d;
+      --green-500:#21c77a;
+      --green-100:#dcf8e9;
+      --green-50:#f1fcf6;
+      --text:#10231d;
+      --muted:#5e7169;
+      --white:#ffffff;
+      --border:#dce9e3;
+      --shadow:0 18px 50px rgba(5,46,34,.13);
+      --radius:22px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+      color:var(--text);
+      background:#fff;
+      line-height:1.55;
+    }
+    a{text-decoration:none;color:inherit}
+    button,input{font:inherit}
+
+    .topbar{
+      background:var(--green-950);
+      color:#fff;
+      text-align:center;
+      padding:9px 16px;
+      font-size:13px;
+      font-weight:700;
+      letter-spacing:.1px;
+    }
+
+    .hero{
+      position:relative;
+      overflow:hidden;
+      background:
+        radial-gradient(circle at 88% 18%, rgba(33,199,122,.20), transparent 27%),
+        radial-gradient(circle at 8% 92%, rgba(33,199,122,.12), transparent 28%),
+        linear-gradient(145deg,var(--green-950),var(--green-900) 55%,#075b42);
+      color:#fff;
+      padding:58px 20px 72px;
+    }
+
+    .hero:before,.hero:after{
+      content:"";
+      position:absolute;
+      width:280px;height:280px;
+      border:1px solid rgba(255,255,255,.08);
+      transform:rotate(45deg);
+      pointer-events:none;
+    }
+    .hero:before{right:-150px;top:-110px}
+    .hero:after{left:-190px;bottom:-190px}
+
+    .container{
+      width:min(1080px,100%);
+      margin:0 auto;
+      position:relative;
+      z-index:1;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:48px;
+      align-items:center;
+    }
+
+    .excel-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      background:rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.16);
+      padding:8px 13px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:800;
+      margin-bottom:20px;
+      backdrop-filter:blur(8px);
+    }
+
+    .excel-icon{
+      width:30px;height:30px;
+      display:grid;place-items:center;
+      border-radius:7px;
+      background:#18b96e;
+      color:#fff;
+      font-weight:900;
+      font-size:16px;
+    }
+
+    h1{
+      margin:0 0 18px;
+      font-size:clamp(38px,5.2vw,64px);
+      line-height:1.02;
+      letter-spacing:-2.4px;
+      max-width:720px;
+    }
+    h1 span{color:#63e89f}
+
+    .hero-copy{
+      margin:0 0 28px;
+      max-width:650px;
+      color:#dcefe7;
+      font-size:clamp(17px,2vw,20px);
+    }
+
+    .proof{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      color:#e9f8f1;
+      font-size:13px;
+      font-weight:700;
+    }
+    .proof span{
+      display:inline-flex;
+      align-items:center;
+      gap:7px;
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.11);
+      border-radius:999px;
+      padding:8px 11px;
+    }
+    .check{color:#63e89f;font-weight:900}
+
+    .capture-card{
+      background:#fff;
+      color:var(--text);
+      border-radius:26px;
+      padding:28px;
+      box-shadow:0 25px 70px rgba(0,0,0,.23);
+      border:1px solid rgba(255,255,255,.25);
+    }
+
+    .capture-card h2{
+      margin:0 0 8px;
+      font-size:25px;
+      line-height:1.15;
+      letter-spacing:-.7px;
+    }
+    .capture-card > p{
+      margin:0 0 20px;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .benefit-list{
+      display:grid;
+      gap:10px;
+      margin:0 0 22px;
+    }
+    .benefit{
+      display:flex;
+      gap:11px;
+      align-items:flex-start;
+      background:var(--green-50);
+      border:1px solid #d5f0e1;
+      padding:11px 12px;
+      border-radius:13px;
+      font-size:14px;
+    }
+    .benefit b{display:block}
+    .benefit small{color:var(--muted)}
+
+    label{
+      display:block;
+      font-size:12px;
+      font-weight:800;
+      margin:13px 0 6px;
+    }
+    input{
+      width:100%;
+      border:1px solid #cddbd5;
+      border-radius:12px;
+      padding:13px 14px;
+      color:var(--text);
+      outline:none;
+      background:#fff;
+      transition:.2s;
+    }
+    input:focus{
+      border-color:var(--green-700);
+      box-shadow:0 0 0 4px rgba(11,138,93,.10);
+    }
+
+    .cta{
+      width:100%;
+      border:0;
+      border-radius:13px;
+      padding:15px 18px;
+      margin-top:18px;
+      background:linear-gradient(135deg,#12ad68,#20cf7c);
+      color:#fff;
+      font-weight:900;
+      font-size:16px;
+      cursor:pointer;
+      box-shadow:0 10px 24px rgba(11,138,93,.23);
+      transition:transform .15s,box-shadow .15s;
+    }
+    .cta:hover{transform:translateY(-1px);box-shadow:0 13px 28px rgba(11,138,93,.29)}
+    .cta:active{transform:translateY(0)}
+
+    .privacy{
+      margin:10px 0 0;
+      text-align:center;
+      color:#7a8c85;
+      font-size:11px;
+    }
+
+    .section{
+      padding:72px 20px;
+    }
+    .section.alt{background:var(--green-50)}
+
+    .section-title{
+      text-align:center;
+      max-width:720px;
+      margin:0 auto 38px;
+    }
+    .eyebrow{
+      color:var(--green-700);
+      text-transform:uppercase;
+      letter-spacing:1.3px;
+      font-size:12px;
+      font-weight:900;
+      margin-bottom:9px;
+    }
+    h2.section-heading{
+      margin:0 0 12px;
+      font-size:clamp(29px,4vw,43px);
+      line-height:1.08;
+      letter-spacing:-1.4px;
+    }
+    .section-title p{
+      color:var(--muted);
+      margin:0;
+      font-size:16px;
+    }
+
+    .features{
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:14px;
+    }
+    .feature{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:18px;
+      padding:20px 16px;
+      min-height:180px;
+      box-shadow:0 7px 25px rgba(5,46,34,.05);
+    }
+    .num{
+      width:38px;height:38px;
+      border-radius:11px;
+      background:var(--green-100);
+      color:var(--green-800);
+      display:grid;place-items:center;
+      font-weight:900;
+      margin-bottom:15px;
+    }
+    .feature h3{font-size:16px;margin:0 0 7px}
+    .feature p{font-size:13px;color:var(--muted);margin:0}
+
+    .bridge{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:35px;
+      align-items:center;
+    }
+    .bridge-card{
+      border-radius:24px;
+      background:linear-gradient(145deg,#063a2b,#0a7050);
+      color:#fff;
+      padding:34px;
+      box-shadow:var(--shadow);
+    }
+    .bridge-card blockquote{
+      margin:0;
+      font-size:clamp(24px,3vw,36px);
+      line-height:1.12;
+      font-weight:900;
+      letter-spacing:-1px;
+    }
+    .bridge-card blockquote span{color:#63e89f}
+    .bridge-text h2{font-size:32px;line-height:1.1;margin:0 0 13px}
+    .bridge-text p{color:var(--muted);margin:0 0 18px}
+    .mini-list{display:grid;gap:11px}
+    .mini-list div{
+      display:flex;gap:10px;align-items:flex-start;
+      font-size:14px;font-weight:700;
+    }
+
+    .cta-section{
+      background:var(--green-950);
+      color:#fff;
+      text-align:center;
+      padding:72px 20px 78px;
+    }
+    .cta-section h2{
+      margin:0 auto 12px;
+      max-width:720px;
+      font-size:clamp(31px,4.5vw,48px);
+      line-height:1.06;
+      letter-spacing:-1.6px;
+    }
+    .cta-section p{
+      color:#cde8dd;
+      max-width:620px;
+      margin:0 auto 24px;
+    }
+    .cta-section .cta{
+      width:auto;
+      min-width:260px;
+      display:inline-block;
+    }
+
+    footer{
+      background:#032319;
+      color:#9fc4b5;
+      text-align:center;
+      padding:18px;
+      font-size:11px;
+    }
+
+    .message{
+      display:none;
+      margin-top:12px;
+      border-radius:11px;
+      padding:11px 12px;
+      font-size:13px;
+      font-weight:700;
+    }
+    .message.ok{
+      display:block;
+      background:#e6faef;
+      color:#08633f;
+    }
+    .message.error{
+      display:block;
+      background:#fff0f0;
+      color:#9b2525;
+    }
+
+    @media (max-width:900px){
+      .hero-grid,.bridge{grid-template-columns:1fr}
+      .hero{padding-top:44px}
+      .capture-card{max-width:620px;margin:0 auto}
+      .features{grid-template-columns:repeat(2,1fr)}
+    }
+
+    @media (max-width:560px){
+      .topbar{font-size:11px;padding:8px 10px}
+      .hero{padding:34px 16px 48px}
+      h1{font-size:41px;letter-spacing:-1.7px}
+      .hero-copy{font-size:16px}
+      .capture-card{padding:21px;border-radius:20px}
+      .capture-card h2{font-size:22px}
+      .section{padding:55px 16px}
+      .features{grid-template-columns:1fr}
+      .feature{min-height:auto}
+      .bridge-card{padding:25px}
+      .bridge-text h2{font-size:28px}
+      .cta-section{padding:56px 16px 62px}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="topbar">GUIA GRATUITO • 5 RECURSOS PRÁTICOS DO EXCEL PARA O DIA A DIA</div>
+
+  <header class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="excel-badge">
+          <span class="excel-icon">X</span>
+          Material gratuito para quem usa Excel no trabalho
+        </div>
+
+        <h1>Pare de perder tempo com tarefas <span>manuais no Excel.</span></h1>
+
+        <p class="hero-copy">
+          Baixe gratuitamente o <strong>Kit Excel para Economizar Tempo</strong> e descubra
+          5 recursos práticos que podem ajudar você a encontrar informações, organizar dados
+          e reduzir trabalho repetitivo.
+        </p>
+
+        <div class="proof">
+          <span><i class="check">✓</i> Prático</span>
+          <span><i class="check">✓</i> Gratuito</span>
+          <span><i class="check">✓</i> Exemplos para testar</span>
+        </div>
+      </div>
+
+      <div class="capture-card" id="captura">
+        <h2>Receba o Kit gratuitamente</h2>
+        <p>Preencha seus dados e tenha acesso ao material para começar a testar hoje.</p>
+
+        <div class="benefit-list">
+          <div class="benefit">
+            <div class="check">✓</div>
+            <div><b>5 recursos essenciais</b><small>Explicados de forma simples e prática.</small></div>
+          </div>
+          <div class="benefit">
+            <div class="check">✓</div>
+            <div><b>Exemplos para aplicar</b><small>Veja onde cada recurso pode economizar tempo.</small></div>
+          </div>
+          <div class="benefit">
+            <div class="check">✓</div>
+            <div><b>Checklist de produtividade</b><small>Identifique tarefas que podem ser simplificadas.</small></div>
+          </div>
+        </div>
+
+        <form id="leadForm">
+          <label for="nome">Seu nome</label>
+          <input id="nome" name="nome" type="text" placeholder="Como podemos chamar você?" autocomplete="name" required>
+
+          <label for="email">Seu melhor e-mail</label>
+          <input id="email" name="email" type="email" placeholder="voce@email.com" autocomplete="email" required>
+
+          <label for="whatsapp">WhatsApp</label>
+          <input id="whatsapp" name="whatsapp" type="tel" placeholder="(00) 00000-0000" autocomplete="tel" required>
+
+          <button class="cta" type="submit">QUERO RECEBER O KIT GRATUITO →</button>
+          <p class="privacy">Seus dados serão usados para enviar o material e comunicações relacionadas ao conteúdo. Evite inserir dados de terceiros.</p>
+          <div id="message" class="message" aria-live="polite"></div>
+        </form>
+      </div>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-title">
+        <div class="eyebrow">O que você vai encontrar</div>
+        <h2 class="section-heading">Menos trabalho repetitivo. Mais tempo para o que importa.</h2>
+        <p>Você não precisa dominar dezenas de funções para começar a ganhar produtividade.</p>
+      </div>
+
+      <div class="features">
+        <article class="feature">
+          <div class="num">01</div>
+          <h3>PROCX / XLOOKUP</h3>
+          <p>Encontre informações automaticamente em suas tabelas.</p>
+        </article>
+        <article class="feature">
+          <div class="num">02</div>
+          <h3>SOMASES</h3>
+          <p>Some apenas os valores que atendem aos critérios que você precisa.</p>
+        </article>
+        <article class="feature">
+          <div class="num">03</div>
+          <h3>Filtros</h3>
+          <p>Encontre rapidamente os registros relevantes sem reorganizar tudo.</p>
+        </article>
+        <article class="feature">
+          <div class="num">04</div>
+          <h3>Tabela dinâmica</h3>
+          <p>Transforme grandes volumes de dados em relatórios mais úteis.</p>
+        </article>
+        <article class="feature">
+          <div class="num">05</div>
+          <h3>Formatação condicional</h3>
+          <p>Destaque automaticamente informações importantes.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="container bridge">
+      <div class="bridge-card">
+        <blockquote>
+          “Não é sobre usar o Excel o tempo todo.
+          É sobre usar <span>o recurso certo, na hora certa.</span>”
+        </blockquote>
+      </div>
+
+      <div class="bridge-text">
+        <div class="eyebrow">Por que criamos este material?</div>
+        <h2>Seu tempo também é um recurso valioso.</h2>
+        <p>
+          A proposta deste kit é mostrar recursos que você pode testar em situações
+          comuns de trabalho, sem transformar o material em um curso longo.
+        </p>
+
+        <div class="mini-list">
+          <div><span class="check">✓</span> Aprenda uma coisa e teste na prática.</div>
+          <div><span class="check">✓</span> Identifique tarefas que você ainda faz manualmente.</div>
+          <div><span class="check">✓</span> Veja quais recursos fazem sentido para sua rotina.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="container">
+      <h2>Quer começar a economizar tempo no Excel?</h2>
+      <p>
+        Pegue o kit gratuito, escolha um dos cinco recursos e teste no seu próprio trabalho.
+        O objetivo é simples: transformar conhecimento em aplicação.
+      </p>
+      <a class="cta" href="#captura">RECEBER MEU KIT GRATUITO →</a>
+    </div>
+  </section>
+
+  <footer>
+    Kit Excel para Economizar Tempo • Material educativo gratuito
+  </footer>
+
+  <script>
+    const form = document.getElementById("leadForm");
+    const message = document.getElementById("message");
+
+    form.addEventListener("submit", function(event){
+      event.preventDefault();
+
+      const nome = document.getElementById("nome").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const whatsapp = document.getElementById("whatsapp").value.trim();
+
+      if(!nome || !email || !whatsapp){
+        message.className = "message error";
+        message.textContent = "Preencha nome, e-mail e WhatsApp para continuar.";
+        return;
+      }
+
+      // DEMO: aqui entraremos com a integração real de captura/CRM/WhatsApp.
+      message.className = "message ok";
+      message.textContent = "Cadastro validado. A integração de entrega do Kit será conectada nesta etapa.";
+      form.reset();
+    });
+
+    document.getElementById("whatsapp").addEventListener("input", function(e){
+      let v = e.target.value.replace(/\D/g,"").slice(0,11);
+      if(v.length > 6){
+        e.target.value = "(" + v.slice(0,2) + ") " + v.slice(2,7) + "-" + v.slice(7);
+      }else if(v.length > 2){
+        e.target.value = "(" + v.slice(0,2) + ") " + v.slice(2);
+      }else{
+        e.target.value = v;
+      }
+    });
+  </script>
+</body>
+</html>
