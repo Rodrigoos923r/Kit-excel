@@ -179,49 +179,17 @@
     .benefit b{display:block}
     .benefit small{color:var(--muted)}
 
-    label{
-      display:block;
-      font-size:12px;
-      font-weight:800;
-      margin:13px 0 6px;
-    }
-    input{
+    /* Espaçamento do formulário HubSpot */
+    .hs-form-frame{
       width:100%;
-      border:1px solid #cddbd5;
-      border-radius:12px;
-      padding:13px 14px;
-      color:var(--text);
-      outline:none;
-      background:#fff;
-      transition:.2s;
-    }
-    input:focus{
-      border-color:var(--green-700);
-      box-shadow:0 0 0 4px rgba(11,138,93,.10);
+      margin-top:4px;
     }
 
-    .cta{
-      width:100%;
-      border:0;
-      border-radius:13px;
-      padding:15px 18px;
-      margin-top:18px;
-      background:linear-gradient(135deg,#12ad68,#20cf7c);
-      color:#fff;
-      font-weight:900;
-      font-size:16px;
-      cursor:pointer;
-      box-shadow:0 10px 24px rgba(11,138,93,.23);
-      transition:transform .15s,box-shadow .15s;
-    }
-    .cta:hover{transform:translateY(-1px);box-shadow:0 13px 28px rgba(11,138,93,.29)}
-    .cta:active{transform:translateY(0)}
-
-    .privacy{
-      margin:10px 0 0;
-      text-align:center;
-      color:#7a8c85;
-      font-size:11px;
+    /* O HubSpot gera os campos dentro do iframe/estrutura própria.
+       Estas regras não interferem no funcionamento do formulário. */
+    .capture-card .hs-form-frame iframe{
+      width:100% !important;
+      max-width:100% !important;
     }
 
     .section{
@@ -330,6 +298,14 @@
       width:auto;
       min-width:260px;
       display:inline-block;
+      border-radius:13px;
+      padding:15px 18px;
+      background:linear-gradient(135deg,#12ad68,#20cf7c);
+      color:#fff;
+      font-weight:900;
+      font-size:16px;
+      cursor:pointer;
+      box-shadow:0 10px 24px rgba(11,138,93,.23);
     }
 
     footer{
@@ -338,25 +314,6 @@
       text-align:center;
       padding:18px;
       font-size:11px;
-    }
-
-    .message{
-      display:none;
-      margin-top:12px;
-      border-radius:11px;
-      padding:11px 12px;
-      font-size:13px;
-      font-weight:700;
-    }
-    .message.ok{
-      display:block;
-      background:#e6faef;
-      color:#08633f;
-    }
-    .message.error{
-      display:block;
-      background:#fff0f0;
-      color:#9b2525;
     }
 
     @media (max-width:900px){
@@ -428,20 +385,12 @@
           </div>
         </div>
 
-        <form id="leadForm">
-          <label for="nome">Seu nome</label>
-          <input id="nome" name="nome" type="text" placeholder="Como podemos chamar você?" autocomplete="name" required>
-
-          <label for="email">Seu melhor e-mail</label>
-          <input id="email" name="email" type="email" placeholder="voce@email.com" autocomplete="email" required>
-
-          <label for="whatsapp">WhatsApp</label>
-          <input id="whatsapp" name="whatsapp" type="tel" placeholder="(00) 00000-0000" autocomplete="tel" required>
-
-          <button class="cta" type="submit">QUERO RECEBER O KIT GRATUITO →</button>
-          <p class="privacy">Seus dados serão usados para enviar o material e comunicações relacionadas ao conteúdo. Evite inserir dados de terceiros.</p>
-          <div id="message" class="message" aria-live="polite"></div>
-        </form>
+        <!-- FORMULÁRIO HUBSPOT -->
+        <script src="https://js.hsforms.net/forms/embed/52064704.js" defer></script>
+        <div class="hs-form-frame"
+             data-region="na1"
+             data-form-id="002a16ac-c236-4ced-8b00-df0d4b6db9cc"
+             data-portal-id="52064704"></div>
       </div>
     </div>
   </header>
@@ -524,40 +473,5 @@
   <footer>
     Kit Excel para Economizar Tempo • Material educativo gratuito
   </footer>
-
-  <script>
-    const form = document.getElementById("leadForm");
-    const message = document.getElementById("message");
-
-    form.addEventListener("submit", function(event){
-      event.preventDefault();
-
-      const nome = document.getElementById("nome").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const whatsapp = document.getElementById("whatsapp").value.trim();
-
-      if(!nome || !email || !whatsapp){
-        message.className = "message error";
-        message.textContent = "Preencha nome, e-mail e WhatsApp para continuar.";
-        return;
-      }
-
-      // DEMO: aqui entraremos com a integração real de captura/CRM/WhatsApp.
-      message.className = "message ok";
-      message.textContent = "Cadastro validado. A integração de entrega do Kit será conectada nesta etapa.";
-      form.reset();
-    });
-
-    document.getElementById("whatsapp").addEventListener("input", function(e){
-      let v = e.target.value.replace(/\D/g,"").slice(0,11);
-      if(v.length > 6){
-        e.target.value = "(" + v.slice(0,2) + ") " + v.slice(2,7) + "-" + v.slice(7);
-      }else if(v.length > 2){
-        e.target.value = "(" + v.slice(0,2) + ") " + v.slice(2);
-      }else{
-        e.target.value = v;
-      }
-    });
-  </script>
 </body>
 </html>
